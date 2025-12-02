@@ -1,4 +1,4 @@
-package mock
+package svc
 
 import (
 	"fmt"
@@ -8,8 +8,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	httpsvc "github.com/NawafSwe/mockchaos/http"
-	"github.com/NawafSwe/mockchaos/internal/core/http"
+	httpsvc "github.com/nawafswe/mockchaos/http"
+	"github.com/nawafswe/mockchaos/internal/core/http"
 )
 
 // RunHTTPMock starts a new HTTP server with the given handlers and port.

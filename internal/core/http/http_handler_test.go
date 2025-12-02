@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/NawafSwe/mockchaos/internal/core/http"
+	"github.com/nawafswe/mockchaos/internal/core/http"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -4,7 +4,7 @@ package http
 import (
 	nethttp "net/http"
 
-	"github.com/NawafSwe/mockchaos/internal/core/http"
+	"github.com/nawafswe/mockchaos/internal/core/http"
 )
 
 // NewServer creates a new http server with given handlers and returns a function to start the server and a function to close the server.
