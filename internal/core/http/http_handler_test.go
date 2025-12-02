@@ -1,4 +1,4 @@
-package core_test
+package http_test
 
 import (
 	"io"
@@ -7,22 +7,23 @@ import (
 	"testing"
 	"time"
 
-	"github.com/NawafSwe/gofi/internal/core"
+	"github.com/NawafSwe/gofi/internal/core/http"
 	"github.com/stretchr/testify/assert"
 )
 
 func Test_NewHTTPHandler(t *testing.T) {
 	tests := map[string]struct {
-		handlers           []core.Handler
+		handlers           []http.Handler
 		expectedStatusCode []int
 		path               string
 		expectedBody       []byte
 	}{
 		"should successfully register http test server and randomly respond with status code and latency": {
-			handlers: []core.Handler{
+			handlers: []http.Handler{
 				{
 					Path:      "/gofi",
 					Body:      []byte(`GoFi!`),
+					Headers:   map[string]string{"Content-Type": "application/json"},
 					Method:    nethttp.MethodGet,
 					Statuses:  []int{nethttp.StatusOK, nethttp.StatusInternalServerError},
 					Latencies: []time.Duration{10 * time.Millisecond, 20 * time.Millisecond},
@@ -33,7 +34,7 @@ func Test_NewHTTPHandler(t *testing.T) {
 			expectedBody:       []byte(`GoFi!`),
 		},
 		"should return default response when no handler found for the given path and method": {
-			handlers: []core.Handler{
+			handlers: []http.Handler{
 				{
 					Path:      "/gofi",
 					Body:      []byte(`GoFi!`),
@@ -53,11 +54,23 @@ func Test_NewHTTPHandler(t *testing.T) {
 			path:               "/unknown/path",
 			expectedBody:       []byte(`{"error": "Not found"}`),
 		},
+		"should return ok response when no statuses and latencies are provided": {
+			handlers: []http.Handler{
+				{
+					Path:   "/gofi",
+					Body:   []byte(`GoFi!`),
+					Method: nethttp.MethodGet,
+				},
+			},
+			path:               "/gofi",
+			expectedBody:       []byte(`GoFi!`),
+			expectedStatusCode: []int{nethttp.StatusOK},
+		},
 	}
 	for name, tc := range tests {
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
-			handlers := core.NewHTTPHandler(tc.handlers...)
+			handlers := http.NewHTTPHandler(tc.handlers...)
 			assert.NotNil(t, handlers)
 			// assert handlers can be called.
 			svc := httptest.NewServer(handlers)
