@@ -1,4 +1,4 @@
-// Package http provides the core HTTP mocking functionality for GoFi.
+// Package http provides the core HTTP mocking functionality for mockchaos.
 //
 // This package implements the shared logic for building HTTP mock handlers that can be used
 // both in-process (via httptest) and as standalone servers (for Kubernetes deployments).

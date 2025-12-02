@@ -1,4 +1,4 @@
-package gofi
+package mock
 
 import (
 	"fmt"
@@ -8,29 +8,29 @@ import (
 	"path/filepath"
 	"strings"
 
-	httpsvc "github.com/NawafSwe/gofi/http"
-	"github.com/NawafSwe/gofi/internal/core/http"
+	httpsvc "github.com/NawafSwe/mockchaos/http"
+	"github.com/NawafSwe/mockchaos/internal/core/http"
 )
 
 // RunHTTPMock starts a new HTTP server with the given handlers and port.
 func RunHTTPMock(port int, mocksPath string) {
 	if mocksPath == "" {
-		log.Fatal("Gofi: mocks_path is required")
+		log.Fatal("mocks_path is required")
 	}
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
 	if err != nil {
-		log.Fatalf("Gofi: failed to listen: %v", err)
+		log.Fatalf("failed to listen: %v", err)
 	}
 	handlers, err := loadHandlersFromDirectory(mocksPath)
 	if err != nil {
-		log.Fatalf("Gofi: failed to load mocks directory: %v", err)
+		log.Fatalf("failed to load mocks directory: %v", err)
 	}
 	svc := httpsvc.NewServer(handlers...)
 	if svc == nil {
 		log.Fatalf("failed to create http server")
 	}
-	log.Println("Gofi: handlers registered")
-	log.Printf("Gofi: server started on port %d\n", port)
+	log.Println("handlers registered")
+	log.Printf("server started on port %d\n", port)
 	if err := svc.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
@@ -62,7 +62,7 @@ func loadHandlersFromDirectory(dir string) ([]http.Handler, error) {
 		if err != nil {
 			return fmt.Errorf("failed to parse handlers from %s: %w", path, err)
 		}
-		log.Printf("Gofi: loaded %d handlers from %s\n", len(handlers), path)
+		log.Printf("loaded %d handlers from %s\n", len(handlers), path)
 		allHandlers = append(allHandlers, handlers...)
 
 		return nil

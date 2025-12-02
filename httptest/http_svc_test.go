@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/NawafSwe/gofi/httptest"
-	"github.com/NawafSwe/gofi/internal/core/http"
+	"github.com/NawafSwe/mockchaos/httptest"
+	"github.com/NawafSwe/mockchaos/internal/core/http"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -25,38 +25,38 @@ func Test_HTTP_Server(t *testing.T) {
 		"should successfully register http test server and randomly respond with status code and latency": {
 			handlers: []http.Handler{
 				{
-					Path:      "/gofi",
-					Body:      []byte(`GoFi!`),
+					Path:      "/chaos",
+					Body:      []byte(`CHAOS!`),
 					Method:    nethttp.MethodGet,
 					Statuses:  []int{nethttp.StatusOK, nethttp.StatusInternalServerError},
 					Latencies: []time.Duration{10 * time.Millisecond, 20 * time.Millisecond},
 				},
 			},
 			method:              nethttp.MethodGet,
-			path:                "/gofi",
-			expectedBody:        []byte(`GoFi!`),
+			path:                "/chaos",
+			expectedBody:        []byte(`CHAOS!`),
 			expectedStatusCode:  []int{nethttp.StatusOK, nethttp.StatusInternalServerError},
 			latencyNotExceeding: time.Millisecond * 50,
 		},
 		"should return default response when no handler found for the given path and method": {
 			handlers: []http.Handler{
 				{
-					Path:      "/gofi",
-					Body:      []byte(`GoFi!`),
+					Path:      "/chaos",
+					Body:      []byte(`CHAOS!`),
 					Method:    nethttp.MethodGet,
 					Statuses:  []int{nethttp.StatusOK, nethttp.StatusInternalServerError},
 					Latencies: []time.Duration{10 * time.Millisecond, 20 * time.Millisecond},
 				},
 				{
 					Path:      "/login",
-					Body:      []byte(`GoFi!`),
+					Body:      []byte(`CHAOS!`),
 					Method:    nethttp.MethodPost,
 					Statuses:  []int{nethttp.StatusOK, nethttp.StatusInternalServerError},
 					Latencies: []time.Duration{10 * time.Millisecond, 20 * time.Millisecond},
 				},
 			},
 			method:              nethttp.MethodPost,
-			path:                "/gofi",
+			path:                "/chaos",
 			expectedBody:        []byte(`{"error": "Not found"}`),
 			expectedStatusCode:  []int{nethttp.StatusNotFound},
 			latencyNotExceeding: time.Millisecond * 10,

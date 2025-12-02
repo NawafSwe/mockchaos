@@ -1,4 +1,4 @@
-module github.com/NawafSwe/gofi
+module github.com/NawafSwe/mockchaos
 
 go 1.25.3
 

@@ -4,7 +4,7 @@ import (
 	"flag"
 	"log"
 
-	"github.com/NawafSwe/gofi/cmd/gofi"
+	"github.com/NawafSwe/mockchaos/cmd/mock"
 )
 
 func main() {
@@ -15,9 +15,9 @@ func main() {
 
 	switch *mockServer {
 	case "http-svc":
-		gofi.RunHTTPMock(*httpPort, *mocksPath)
+		mock.RunHTTPMock(*httpPort, *mocksPath)
 
 	default:
-		log.Fatalf("Gofi: unknown service %q, must be one of: http-svc, grpc-svc", *mockServer)
+		log.Fatalf("unknown service %q, must be one of: http-svc, grpc-svc", *mockServer)
 	}
 }

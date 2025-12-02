@@ -9,14 +9,14 @@ import (
 	"testing"
 	"time"
 
-	"github.com/NawafSwe/gofi/http"
-	http2 "github.com/NawafSwe/gofi/internal/core/http"
+	"github.com/NawafSwe/mockchaos/http"
+	corehttp "github.com/NawafSwe/mockchaos/internal/core/http"
 	"github.com/stretchr/testify/assert"
 )
 
 func Test_HTTP_Server(t *testing.T) {
 	tests := map[string]struct {
-		handlers            []http2.Handler
+		handlers            []corehttp.Handler
 		method              string
 		body                []byte
 		path                string
@@ -25,40 +25,40 @@ func Test_HTTP_Server(t *testing.T) {
 		latencyNotExceeding time.Duration
 	}{
 		"should successfully register http test server and randomly respond with status code and latency": {
-			handlers: []http2.Handler{
+			handlers: []corehttp.Handler{
 				{
-					Path:      "/gofi",
-					Body:      []byte(`GoFi!`),
+					Path:      "/chaos",
+					Body:      []byte(`CHAOS!`),
 					Method:    nethttp.MethodGet,
 					Statuses:  []int{nethttp.StatusOK, nethttp.StatusInternalServerError},
 					Latencies: []time.Duration{10 * time.Millisecond, 20 * time.Millisecond},
 				},
 			},
 			method:              nethttp.MethodGet,
-			path:                "/gofi",
-			expectedBody:        []byte(`GoFi!`),
+			path:                "/chaos",
+			expectedBody:        []byte(`CHAOS!`),
 			expectedStatusCode:  []int{nethttp.StatusOK, nethttp.StatusInternalServerError},
 			latencyNotExceeding: time.Millisecond * 50,
 		},
 		"should return default response when no handler found for the given path and method": {
-			handlers: []http2.Handler{
+			handlers: []corehttp.Handler{
 				{
-					Path:      "/gofi",
-					Body:      []byte(`GoFi!`),
+					Path:      "/chaos",
+					Body:      []byte(`CHAOS!`),
 					Method:    nethttp.MethodGet,
 					Statuses:  []int{nethttp.StatusOK, nethttp.StatusBadGateway},
 					Latencies: []time.Duration{10 * time.Millisecond, 20 * time.Millisecond},
 				},
 				{
 					Path:      "/login",
-					Body:      []byte(`GoFi!`),
+					Body:      []byte(`CHAOS!`),
 					Method:    nethttp.MethodPost,
 					Statuses:  []int{nethttp.StatusOK, nethttp.StatusBadGateway},
 					Latencies: []time.Duration{10 * time.Millisecond, 20 * time.Millisecond},
 				},
 			},
 			method:              nethttp.MethodPost,
-			path:                "/gofi",
+			path:                "/chaos",
 			expectedBody:        []byte(`{"error": "Not found"}`),
 			expectedStatusCode:  []int{nethttp.StatusNotFound},
 			latencyNotExceeding: time.Millisecond * 10,
