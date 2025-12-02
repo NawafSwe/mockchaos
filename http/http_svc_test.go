@@ -75,7 +75,9 @@ func Test_HTTP_Server(t *testing.T) {
 			// start a server in a goroutine.
 			l, err := net.Listen("tcp", ":0")
 			assert.NoError(t, err)
-			go server.Serve(l)
+			go func() {
+				_ = server.Serve(l)
+			}()
 			// wait for the server to start.
 			time.Sleep(time.Second * 1)
 			req, err := nethttp.NewRequest(tc.method, fmt.Sprintf("http://%s", l.Addr().String())+tc.path, bytes.NewBuffer(tc.body))
@@ -84,7 +86,7 @@ func Test_HTTP_Server(t *testing.T) {
 			start := time.Now()
 			c := nethttp.Client{}
 			res, err := c.Do(req)
-			delta := time.Now().Sub(start)
+			delta := time.Since(start)
 			assert.NoError(t, err)
 			assert.NotNil(t, res)
 

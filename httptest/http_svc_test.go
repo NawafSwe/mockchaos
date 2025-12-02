@@ -77,7 +77,7 @@ func Test_HTTP_Server(t *testing.T) {
 			start := time.Now()
 			c := nethttp.Client{}
 			res, err := c.Do(req)
-			delta := time.Now().Sub(start)
+			delta := time.Since(start)
 			assert.NoError(t, err)
 			assert.NotNil(t, res)
 

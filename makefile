@@ -40,4 +40,4 @@ lint: ## Run all enabled linters
 	@echo "=========================================="
 	LINTER_FLAGS="-v"; \
     	golangci-lint run ${LINTER_FLAGS}; \
-    	docker run -t --rm -v ${PWD}:/app -v $$(go env GOMODCACHE):/go/pkg/mod  -w /app golangci/golangci-lint:v2.4.0 sh -c "$${CMD}"
+    	docker run -t --rm -v ${PWD}:/app -v $$(go env GOMODCACHE):/go/pkg/mod  -w /app golangci/golangci-lint:v2.6.2 sh -c "$${CMD}"

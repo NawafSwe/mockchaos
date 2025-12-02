@@ -81,7 +81,7 @@ func NewHTTPHandler(handlers ...Handler) nethttp.Handler {
 
 // status returns a random status code from the given slice of integers.
 func status(statuses []int) int {
-	if statuses == nil || len(statuses) == 0 {
+	if len(statuses) == 0 {
 		return nethttp.StatusOK
 	}
 	return statuses[rand.IntN(len(statuses))]
