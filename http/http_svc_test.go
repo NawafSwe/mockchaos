@@ -10,12 +10,13 @@ import (
 	"time"
 
 	"github.com/NawafSwe/gofi/http"
+	"github.com/NawafSwe/gofi/internal/core"
 	"github.com/stretchr/testify/assert"
 )
 
 func Test_HTTP_Server(t *testing.T) {
 	tests := map[string]struct {
-		handlers            []http.Handler
+		handlers            []core.Handler
 		method              string
 		body                []byte
 		path                string
@@ -24,7 +25,7 @@ func Test_HTTP_Server(t *testing.T) {
 		latencyNotExceeding time.Duration
 	}{
 		"should successfully register http test server and randomly respond with status code and latency": {
-			handlers: []http.Handler{
+			handlers: []core.Handler{
 				{
 					Path:      "/gofi",
 					Body:      []byte(`GoFi!`),
@@ -40,7 +41,7 @@ func Test_HTTP_Server(t *testing.T) {
 			latencyNotExceeding: time.Millisecond * 50,
 		},
 		"should return default response when no handler found for the given path and method": {
-			handlers: []http.Handler{
+			handlers: []core.Handler{
 				{
 					Path:      "/gofi",
 					Body:      []byte(`GoFi!`),
