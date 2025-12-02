@@ -1,0 +1,143 @@
+[
+  {
+    "path": "/api/v1/verify",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "verified": true,
+      "verification_id": "ver_987654321",
+      "status": "approved",
+      "verified_at": "2024-01-15T10:35:00Z",
+      "document_type": "national_id",
+      "document_number": "***1234",
+      "expiry_date": "2030-12-31",
+      "confidence_score": 0.98
+    },
+    "latencies": [
+      "200ms",
+      "400ms",
+      "600ms"
+    ],
+    "statuses": [
+      200,
+      400,
+      500
+    ]
+  },
+  {
+    "path": "/api/v1/verify",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "verified": false,
+      "verification_id": "ver_987654322",
+      "status": "rejected",
+      "verified_at": "2024-01-15T10:35:00Z",
+      "reason": "Document expired",
+      "document_type": "national_id",
+      "document_number": "***5678",
+      "confidence_score": 0.45
+    },
+    "latencies": [
+      "180ms",
+      "350ms"
+    ],
+    "statuses": [
+      200,
+      400
+    ]
+  },
+  {
+    "path": "/api/v1/verify/batch",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "batch_id": "batch_456789",
+      "total": 10,
+      "verified": 8,
+      "rejected": 2,
+      "results": [
+        {
+          "document_id": "doc_001",
+          "verified": true,
+          "status": "approved"
+        },
+        {
+          "document_id": "doc_002",
+          "verified": false,
+          "status": "rejected",
+          "reason": "Low quality image"
+        }
+      ],
+      "processed_at": "2024-01-15T10:40:00Z"
+    },
+    "latencies": [
+      "500ms",
+      "1s",
+      "1.5s"
+    ],
+    "statuses": [
+      200,
+      400,
+      500
+    ]
+  },
+  {
+    "path": "/api/v1/verify/ver_987654321",
+    "method": "GET",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "verification_id": "ver_987654321",
+      "verified": true,
+      "status": "approved",
+      "verified_at": "2024-01-15T10:35:00Z",
+      "document_type": "national_id",
+      "document_number": "***1234",
+      "expiry_date": "2030-12-31",
+      "confidence_score": 0.98,
+      "metadata": {
+        "issuer": "Department of Motor Vehicles",
+        "issue_date": "2020-01-15",
+        "verification_method": "automated"
+      }
+    },
+    "latencies": [
+      "100ms",
+      "200ms"
+    ],
+    "statuses": [
+      200,
+      404,
+      500
+    ]
+  },
+  {
+    "path": "/api/v1/verify/health",
+    "method": "GET",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "status": "healthy",
+      "version": "1.2.3",
+      "uptime": "720h30m15s",
+      "timestamp": "2024-01-15T10:45:00Z"
+    },
+    "latencies": [
+      "50ms",
+      "100ms"
+    ],
+    "statuses": [
+      200,
+      503
+    ]
+  }
+]

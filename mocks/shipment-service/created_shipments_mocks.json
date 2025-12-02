@@ -1,0 +1,166 @@
+[
+  {
+    "path": "/api/v1/shipments",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "id": "ship_123456",
+      "tracking_number": "TRK789012345",
+      "status": "created",
+      "created_at": "2024-01-15T10:30:00Z",
+      "origin": {
+        "address": "123 Main St",
+        "city": "New York",
+        "country": "USA"
+      },
+      "destination": {
+        "address": "456 Oak Ave",
+        "city": "Los Angeles",
+        "country": "USA"
+      },
+      "weight": 2.5,
+      "dimensions": {
+        "length": 10,
+        "width": 5,
+        "height": 3
+      }
+    },
+    "latencies": [
+      "150ms",
+      "300ms",
+      "500ms"
+    ],
+    "statuses": [
+      201,
+      400,
+      500
+    ]
+  },
+  {
+    "path": "/api/v1/shipments",
+    "method": "GET",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "shipments": [
+        {
+          "id": "ship_123456",
+          "tracking_number": "TRK789012345",
+          "status": "created",
+          "created_at": "2024-01-15T10:30:00Z"
+        },
+        {
+          "id": "ship_123457",
+          "tracking_number": "TRK789012346",
+          "status": "in_transit",
+          "created_at": "2024-01-15T09:15:00Z"
+        }
+      ],
+      "total": 2,
+      "page": 1,
+      "per_page": 20
+    },
+    "latencies": [
+      "100ms",
+      "200ms"
+    ],
+    "statuses": [
+      200,
+      500
+    ]
+  },
+  {
+    "path": "/api/v1/shipments/ship_123456",
+    "method": "GET",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "id": "ship_123456",
+      "tracking_number": "TRK789012345",
+      "status": "created",
+      "created_at": "2024-01-15T10:30:00Z",
+      "updated_at": "2024-01-15T10:30:00Z",
+      "origin": {
+        "address": "123 Main St",
+        "city": "New York",
+        "country": "USA",
+        "postal_code": "10001"
+      },
+      "destination": {
+        "address": "456 Oak Ave",
+        "city": "Los Angeles",
+        "country": "USA",
+        "postal_code": "90001"
+      },
+      "weight": 2.5,
+      "dimensions": {
+        "length": 10,
+        "width": 5,
+        "height": 3,
+        "unit": "inches"
+      },
+      "carrier": "FedEx",
+      "estimated_delivery": "2024-01-20T14:00:00Z"
+    },
+    "latencies": [
+      "80ms",
+      "150ms",
+      "250ms"
+    ],
+    "statuses": [
+      200,
+      404,
+      500
+    ]
+  },
+  {
+    "path": "/api/v1/shipments/ship_123456/status",
+    "method": "PATCH",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "id": "ship_123456",
+      "status": "in_transit",
+      "updated_at": "2024-01-15T11:00:00Z",
+      "location": {
+        "city": "Chicago",
+        "state": "IL",
+        "country": "USA"
+      }
+    },
+    "latencies": [
+      "120ms",
+      "200ms"
+    ],
+    "statuses": [
+      200,
+      404,
+      400
+    ]
+  },
+  {
+    "path": "/api/v1/shipments/ship_123456",
+    "method": "DELETE",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "message": "Shipment deleted successfully",
+      "id": "ship_123456"
+    },
+    "latencies": [
+      "100ms",
+      "180ms"
+    ],
+    "statuses": [
+      200,
+      404,
+      409
+    ]
+  }
+]
