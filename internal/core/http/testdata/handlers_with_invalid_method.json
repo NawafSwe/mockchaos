@@ -1,0 +1,23 @@
+[{
+  "path": "/api/v1/hello",
+  "method": "?",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "query": {
+    "name": "nawaf"
+  },
+  "body": {
+    "hello": "world"
+  },
+  "latencies": [
+    "100ms",
+    "1s",
+    "300ms"
+  ],
+  "statuses": [
+    200,
+    400,
+    500
+  ]
+}]

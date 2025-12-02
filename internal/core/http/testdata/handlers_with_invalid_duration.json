@@ -1,0 +1,20 @@
+[
+  {
+    "path": "/api/v1/hello",
+    "method": "GET",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {"hello": "world"},
+    "latencies": [
+      "100ms",
+      "1MNMNMNMN",
+      "300ms"
+    ],
+    "statuses": [
+      200,
+      400,
+      500
+    ]
+  }
+]
