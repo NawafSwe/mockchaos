@@ -8,8 +8,8 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/nawafswe/mockchaos/core/http"
 	httpsvc "github.com/nawafswe/mockchaos/http"
-	"github.com/nawafswe/mockchaos/internal/core/http"
 )
 
 // RunHTTPMock starts a new HTTP server with the given handlers and port.

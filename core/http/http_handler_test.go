@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/nawafswe/mockchaos/internal/core/http"
+	"github.com/nawafswe/mockchaos/core/http"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -22,7 +22,7 @@ func Test_NewHTTPHandler(t *testing.T) {
 			handlers: []http.Handler{
 				{
 					Path:      "/chaos",
-					Body:      []byte(`CHAOS!`),
+					Response:  []byte(`CHAOS!`),
 					Headers:   map[string]string{"Content-Type": "application/json"},
 					Method:    nethttp.MethodGet,
 					Statuses:  []int{nethttp.StatusOK, nethttp.StatusInternalServerError},
@@ -37,14 +37,14 @@ func Test_NewHTTPHandler(t *testing.T) {
 			handlers: []http.Handler{
 				{
 					Path:      "/chaos",
-					Body:      []byte(`CHAOS!`),
+					Response:  []byte(`CHAOS!`),
 					Method:    nethttp.MethodGet,
 					Statuses:  []int{nethttp.StatusOK, nethttp.StatusInternalServerError},
 					Latencies: []time.Duration{10 * time.Millisecond, 20 * time.Millisecond},
 				},
 				{
 					Path:      "/login",
-					Body:      []byte(`CHAOS!`),
+					Response:  []byte(`CHAOS!`),
 					Method:    nethttp.MethodPost,
 					Statuses:  []int{nethttp.StatusOK, nethttp.StatusInternalServerError},
 					Latencies: []time.Duration{10 * time.Millisecond, 20 * time.Millisecond},
@@ -57,9 +57,9 @@ func Test_NewHTTPHandler(t *testing.T) {
 		"should return ok response when no statuses and latencies are provided": {
 			handlers: []http.Handler{
 				{
-					Path:   "/chaos",
-					Body:   []byte(`CHAOS!`),
-					Method: nethttp.MethodGet,
+					Path:     "/chaos",
+					Response: []byte(`CHAOS!`),
+					Method:   nethttp.MethodGet,
 				},
 			},
 			path:               "/chaos",

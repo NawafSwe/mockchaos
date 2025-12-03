@@ -5,7 +5,7 @@
     "headers": {
       "Content-Type": "application/json"
     },
-    "body": {
+    "response": {
       "verified": true,
       "verification_id": "ver_987654321",
       "status": "approved",
@@ -32,7 +32,7 @@
     "headers": {
       "Content-Type": "application/json"
     },
-    "body": {
+    "response": {
       "verified": false,
       "verification_id": "ver_987654322",
       "status": "rejected",
@@ -57,7 +57,7 @@
     "headers": {
       "Content-Type": "application/json"
     },
-    "body": {
+    "response": {
       "batch_id": "batch_456789",
       "total": 10,
       "verified": 8,
@@ -94,7 +94,7 @@
     "headers": {
       "Content-Type": "application/json"
     },
-    "body": {
+    "response": {
       "verification_id": "ver_987654321",
       "verified": true,
       "status": "approved",
@@ -125,7 +125,7 @@
     "headers": {
       "Content-Type": "application/json"
     },
-    "body": {
+    "response": {
       "status": "healthy",
       "version": "1.2.3",
       "uptime": "720h30m15s",

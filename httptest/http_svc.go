@@ -4,7 +4,7 @@ package httptest
 import (
 	"net/http/httptest"
 
-	"github.com/nawafswe/mockchaos/internal/core/http"
+	"github.com/nawafswe/mockchaos/core/http"
 )
 
 // Server represents an http server registered with handlers.

@@ -9,7 +9,7 @@
 //
 // A Handler represents a single mock endpoint configuration:
 //   - Path and Method: Define the route (e.g., GET /api/users)
-//   - Body: The response body to return
+//   - Response: The response body to return
 //   - Statuses: One or more HTTP status codes to randomly select from
 //   - Latencies: Optional delays to simulate network latency
 //   - Headers: Custom HTTP headers to include in the response
@@ -22,7 +22,7 @@
 //	    {
 //	        Path:     "/api/users",
 //	        Method:   "GET",
-//	        Body:     []byte(`{"id": 1, "name": "Alice"}`),
+//	        Response:     []byte(`{"id": 1, "name": "Alice"}`),
 //	        Statuses: []int{200, 500},
 //	        Latencies: []time.Duration{100 * time.Millisecond, 200 * time.Millisecond},
 //	        Headers:  map[string]string{"Content-Type": "application/json"},
@@ -45,7 +45,7 @@
 //   - A status code is randomly selected from the Statuses slice
 //   - If Latencies is non-empty, a random latency is applied
 //   - Headers are set on the response
-//   - Body is written to the response
+//   - Response is written to the response
 //
 // When no handler matches:
 //   - Returns 404 Not Found with body: {"error": "Not found"}

@@ -25,7 +25,7 @@ var validMethods = map[string]bool{
 type handler struct {
 	Path      string            `json:"path"`
 	Method    string            `json:"method"`
-	Body      map[string]any    `json:"body"`
+	Response  map[string]any    `json:"response"`
 	Statuses  []int             `json:"statuses"`
 	Latencies []string          `json:"latencies"`
 	Headers   map[string]string `json:"headers"`
@@ -61,7 +61,7 @@ func toHandlers(handlers []handler) ([]Handler, error) {
 		if err != nil {
 			return nil, err
 		}
-		marshalledBody, err := json.Marshal(h.Body)
+		marshalledBody, err := json.Marshal(h.Response)
 		if err != nil {
 			return nil, fmt.Errorf("failed to marshal body: %w", err)
 		}
@@ -69,7 +69,7 @@ func toHandlers(handlers []handler) ([]Handler, error) {
 			Path:      h.Path,
 			Method:    h.Method,
 			Statuses:  h.Statuses,
-			Body:      marshalledBody,
+			Response:  marshalledBody,
 			Latencies: l,
 			Headers:   h.Headers,
 		}

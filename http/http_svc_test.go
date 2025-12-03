@@ -9,8 +9,8 @@ import (
 	"testing"
 	"time"
 
+	corehttp "github.com/nawafswe/mockchaos/core/http"
 	"github.com/nawafswe/mockchaos/http"
-	corehttp "github.com/nawafswe/mockchaos/internal/core/http"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -28,7 +28,7 @@ func Test_HTTP_Server(t *testing.T) {
 			handlers: []corehttp.Handler{
 				{
 					Path:      "/chaos",
-					Body:      []byte(`CHAOS!`),
+					Response:  []byte(`CHAOS!`),
 					Method:    nethttp.MethodGet,
 					Statuses:  []int{nethttp.StatusOK, nethttp.StatusInternalServerError},
 					Latencies: []time.Duration{10 * time.Millisecond, 20 * time.Millisecond},
@@ -44,14 +44,14 @@ func Test_HTTP_Server(t *testing.T) {
 			handlers: []corehttp.Handler{
 				{
 					Path:      "/chaos",
-					Body:      []byte(`CHAOS!`),
+					Response:  []byte(`CHAOS!`),
 					Method:    nethttp.MethodGet,
 					Statuses:  []int{nethttp.StatusOK, nethttp.StatusBadGateway},
 					Latencies: []time.Duration{10 * time.Millisecond, 20 * time.Millisecond},
 				},
 				{
 					Path:      "/login",
-					Body:      []byte(`CHAOS!`),
+					Response:  []byte(`CHAOS!`),
 					Method:    nethttp.MethodPost,
 					Statuses:  []int{nethttp.StatusOK, nethttp.StatusBadGateway},
 					Latencies: []time.Duration{10 * time.Millisecond, 20 * time.Millisecond},

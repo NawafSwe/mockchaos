@@ -26,9 +26,9 @@ type Handler struct {
 	// Must be a valid HTTP method as defined by RFC 7231.
 	Method string
 
-	// Body is the response body to return.
+	// Response is the response body to return.
 	// Can be any byte slice - JSON, XML, plain text, etc.
-	Body []byte
+	Response []byte
 
 	// Statuses is a slice of HTTP status codes to randomly select from.
 	// At least one status code must be provided for the handler to be effective.
@@ -75,7 +75,7 @@ func NewHTTPHandler(handlers ...Handler) nethttp.Handler {
 			w.Header().Set(k, v)
 		}
 		w.WriteHeader(randomStatus)
-		_, _ = w.Write(hd.Body)
+		_, _ = w.Write(hd.Response)
 	})
 }
 

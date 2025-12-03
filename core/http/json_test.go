@@ -34,7 +34,7 @@ func TestParseHandlers(t *testing.T) {
 				{
 					Path:      "/api/v1/hello",
 					Method:    http.MethodGet,
-					Body:      []byte(`{"hello":"world"}`),
+					Response:  []byte(`{"hello":"world"}`),
 					Statuses:  []int{http.StatusOK, http.StatusBadRequest, http.StatusInternalServerError},
 					Headers:   map[string]string{"Content-Type": "application/json"},
 					Latencies: []time.Duration{100 * time.Millisecond, time.Second, 300 * time.Millisecond},
@@ -75,8 +75,8 @@ func TestToHandlers(t *testing.T) {
 	t.Run("should fail to convert handlers due to invalid http body", func(t *testing.T) {
 		_, err := toHandlers([]handler{
 			{
-				Method: http.MethodGet,
-				Body:   map[string]any{"h": func() {}},
+				Method:   http.MethodGet,
+				Response: map[string]any{"h": func() {}},
 			},
 		})
 		assert.EqualError(t, fmt.Errorf("failed to marshal body: json: unsupported type: func()"), err.Error())

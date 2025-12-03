@@ -7,7 +7,7 @@
   "query": {
     "name": "nawaf"
   },
-  "body": {
+  "response": {
     "hello": "world"
   },
   "latencies": [
