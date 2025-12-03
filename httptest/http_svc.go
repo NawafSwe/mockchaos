@@ -14,6 +14,7 @@ type Server struct {
 
 // NewServer creates a new http server with given handlers.
 func NewServer(handlers ...http.Handler) *Server {
+
 	svc := Server{}
 	svc.srv = httptest.NewServer(http.NewHTTPHandler(handlers...))
 	return &svc
