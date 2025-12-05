@@ -65,10 +65,7 @@ func Test_HTTP_Server(t *testing.T) {
 	for name, tc := range tests {
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
-			svc := httptest.NewServer(tc.handlers...)
-			t.Cleanup(func() {
-				svc.Close()
-			})
+			svc := httptest.NewServer(t, tc.handlers...)
 
 			assert.NotNil(t, svc)
 			req, err := nethttp.NewRequest(tc.method, svc.URL()+tc.path, bytes.NewBuffer(tc.body))

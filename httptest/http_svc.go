@@ -3,6 +3,7 @@ package httptest
 
 import (
 	"net/http/httptest"
+	"testing"
 
 	"github.com/nawafswe/mockchaos/core/http"
 )
@@ -13,10 +14,14 @@ type Server struct {
 }
 
 // NewServer creates a new http server with given handlers.
-func NewServer(handlers ...http.Handler) *Server {
-
+// The server is automatically started and will be cleaned up when the test completes.
+func NewServer(t *testing.T, handlers ...http.Handler) *Server {
+	t.Helper()
 	svc := Server{}
 	svc.srv = httptest.NewServer(http.NewHTTPHandler(handlers...))
+	t.Cleanup(func() {
+		svc.Close()
+	})
 	return &svc
 }
 
