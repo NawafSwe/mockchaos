@@ -1,0 +1,37 @@
+syntax = "proto3";
+package orders;
+option go_package = "github.com/nawafswe/orders-service/proto";
+
+
+message OrderedItem {
+  int64 item_id = 1;
+  string name = 2;
+  int64 ordered_item_id = 3;
+  int32 ordered_quantity = 4;
+  double price = 5;
+}
+message Order {
+  int64 order_id = 1;
+  int64 restaurant_id = 2;
+  int64 customer_id = 3;
+  string status = 4;
+  double grand_total = 5;
+  repeated OrderedItem items = 6;
+
+}
+
+message OrderStatus {
+  int64 order_id = 1;
+  string status = 2;
+}
+message GetOrderRequest {
+  int64 order_id = 1;
+}
+
+message GetOrderResponse {
+  Order order = 1;
+}
+
+service OrderService{
+  rpc GetOrder(GetOrderRequest) returns(GetOrderResponse);
+}
