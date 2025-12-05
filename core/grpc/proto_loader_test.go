@@ -65,7 +65,7 @@ func TestLoadMessageTypesFromDir(t *testing.T) {
 			t.Parallel()
 			tmpDir := t.TempDir()
 			tc.setup(tmpDir)
-			msgTypes, err := grpc.LoadMessageTypesFromProtoFilePaths(context.TODO(), tmpDir)
+			msgTypes, err := grpc.LoadMessageTypesFromProtoDir(context.TODO(), tmpDir)
 			if tc.expectedErr != nil {
 				assert.Error(t, err)
 				assert.Nil(t, msgTypes)

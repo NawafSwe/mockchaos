@@ -1,37 +1,45 @@
 syntax = "proto3";
-package orders;
-option go_package = "github.com/nawafswe/orders-service/proto";
+
+package restaurants;
+
+option go_package = "github.com/nawafswe/restaurants-service/proto";
 
 
-message OrderedItem {
-  int64 item_id = 1;
-  string name = 2;
-  int64 ordered_item_id = 3;
-  int32 ordered_quantity = 4;
-  double price = 5;
-}
-message Order {
-  int64 order_id = 1;
+message MenuItem {
+  int64 id = 1;
   int64 restaurant_id = 2;
-  int64 customer_id = 3;
-  string status = 4;
-  double grand_total = 5;
-  repeated OrderedItem items = 6;
+  string name = 3;
+  bool is_available = 4;
+  double price = 5;
+  optional string created_at = 6;
+  optional string updated_at = 7;
+}
+message MenuItemId{
+  int64 id = 1;
+  int64 restaurant_id = 2;
+}
+message MenuItemList{
+  repeated MenuItem menuItems = 1;
+}
+
+
+message Restaurant{
+  int64 id = 1;
+  string name = 2;
+  repeated MenuItem menuItems = 3;
+  optional string created_at = 4;
+  optional string updated_at = 5;
 
 }
 
-message OrderStatus {
-  int64 order_id = 1;
-  string status = 2;
-}
-message GetOrderRequest {
-  int64 order_id = 1;
+message RestaurantId {
+  int64 id = 1;
 }
 
-message GetOrderResponse {
-  Order order = 1;
+message RestaurantList{
+  repeated Restaurant restaurants = 1;
 }
 
-service OrderService{
-  rpc GetOrder(GetOrderRequest) returns(GetOrderResponse);
+service RestaurantService{
+  rpc ListMenuItems(RestaurantId) returns(MenuItemList);
 }

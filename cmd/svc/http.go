@@ -1,6 +1,7 @@
 package svc
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"net"
@@ -13,7 +14,7 @@ import (
 )
 
 // RunHTTPMock starts a new HTTP server with the given handlers and port.
-func RunHTTPMock(port int, mocksPath string) {
+func RunHTTPMock(_ context.Context, port int, mocksPath string) {
 	if mocksPath == "" {
 		log.Fatal("mocks_path is required")
 	}

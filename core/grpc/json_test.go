@@ -4,15 +4,14 @@ import (
 	"context"
 	_ "embed"
 	"fmt"
+	"os"
+	"path/filepath"
+	"testing"
 	"time"
 
 	"github.com/nawafswe/mockchaos/core/grpc"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc/codes"
-
-	"os"
-	"path/filepath"
-	"testing"
 )
 
 //go:embed testdata/restaurant.proto
@@ -35,7 +34,7 @@ func TestParseHandlers(t *testing.T) {
 	protoFile := filepath.Join(tmpDir, "restaurant.proto")
 	err := os.WriteFile(protoFile, restaurantProto, 0o644)
 	assert.NoError(t, err)
-	msgTypes, err := grpc.LoadMessageTypesFromProtoFilePaths(context.TODO(), tmpDir)
+	msgTypes, err := grpc.LoadMessageTypesFromProtoDir(context.TODO(), tmpDir)
 	assert.NoError(t, err)
 
 	tests := map[string]struct {

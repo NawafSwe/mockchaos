@@ -4,6 +4,7 @@ go 1.25.3
 
 require (
 	github.com/bufbuild/protocompile v0.14.1
+	github.com/grpc-ecosystem/go-grpc-middleware v1.4.0
 	github.com/stretchr/testify v1.11.1
 	google.golang.org/grpc v1.77.0
 	google.golang.org/protobuf v1.36.10

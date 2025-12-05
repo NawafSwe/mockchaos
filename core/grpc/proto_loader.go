@@ -12,9 +12,9 @@ import (
 	"google.golang.org/protobuf/types/dynamicpb"
 )
 
-// LoadMessageTypesFromProtoFilePaths compiles proto files under a protoDir
+// LoadMessageTypesFromProtoDir compiles proto files under a protoDir
 // and returns a map of the full message name mapped to a MessageType.
-func LoadMessageTypesFromProtoFilePaths(ctx context.Context, protoDir string) (map[string]protoreflect.MessageType, error) {
+func LoadMessageTypesFromProtoDir(ctx context.Context, protoDir string) (map[string]protoreflect.MessageType, error) {
 	var protoFiles []string
 	// Collect all .proto files under protoDir.
 	err := filepath.Walk(protoDir, func(path string, info os.FileInfo, err error) error {
