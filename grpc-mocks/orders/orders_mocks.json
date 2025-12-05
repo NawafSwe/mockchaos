@@ -1,0 +1,20 @@
+[
+  {
+    "service": "orders.OrderService",
+    "method": "GetOrder",
+    "response_proto_type": "orders.GetOrderResponse",
+    "response": {
+      "order": {
+        "orderId": "123",
+        "restaurantId": "456",
+        "customerId": "789",
+        "status": "PENDING",
+        "grandTotal": 29.99,
+        "items": []
+      }
+    },
+    "status_codes": [0, 13],
+    "latencies": ["100ms", "300ms"],
+    "error_message": "mock internal error"
+  }
+]

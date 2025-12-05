@@ -3,17 +3,15 @@ package grpc_test
 import (
 	"context"
 	_ "embed"
-
-	coregrpc "github.com/nawafswe/mockchaos/core/grpc"
-	chaosgrpc "github.com/nawafswe/mockchaos/grpc"
-	"github.com/stretchr/testify/assert"
-	"google.golang.org/grpc"
-
 	"os"
 	"path/filepath"
 	"testing"
 	"time"
 
+	coregrpc "github.com/nawafswe/mockchaos/core/grpc"
+	chaosgrpc "github.com/nawafswe/mockchaos/grpc"
+	"github.com/stretchr/testify/assert"
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/types/dynamicpb"
@@ -27,7 +25,7 @@ func TestServer_Integration(t *testing.T) {
 	// Setup proto files.
 	tmpDir := t.TempDir()
 	protoFile := filepath.Join(tmpDir, "restaurant.proto")
-	err := os.WriteFile(protoFile, restaurantProto, 0644)
+	err := os.WriteFile(protoFile, restaurantProto, 0o644)
 	assert.NoError(t, err)
 
 	// Load proto files.
