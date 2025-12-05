@@ -1,0 +1,5 @@
+syntax = "proto in valid!!!";
+package test;
+message TestMessage {
+  string field = 1;
+}

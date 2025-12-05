@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package restaurants;
+
+option go_package = "github.com/nawafswe/restaurants-service/proto";
+
+
+message MenuItem {
+  int64 id = 1;
+  int64 restaurant_id = 2;
+  string name = 3;
+  bool is_available = 4;
+  double price = 5;
+  optional string created_at = 6;
+  optional string updated_at = 7;
+}
+message MenuItemId{
+  int64 id = 1;
+  int64 restaurant_id = 2;
+}
+message MenuItemList{
+  repeated MenuItem menuItems = 1;
+}
+
+
+message Restaurant{
+  int64 id = 1;
+  string name = 2;
+  repeated MenuItem menuItems = 3;
+  optional string created_at = 4;
+  optional string updated_at = 5;
+
+}
+
+message RestaurantId {
+  int64 id = 1;
+}
+
+message RestaurantList{
+  repeated Restaurant restaurants = 1;
+}
+
+service RestaurantService{
+  rpc ListMenuItems(RestaurantId) returns(MenuItemList);
+}

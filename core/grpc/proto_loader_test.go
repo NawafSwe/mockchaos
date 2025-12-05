@@ -16,7 +16,7 @@ import (
 //go:embed testdata/one_level_proto.proto
 var oneLevelProto []byte
 
-//go:embed testdata/multi_level_proto.proto
+//go:embed testdata/order.proto
 var multiLevelProto []byte
 
 //go:embed testdata/invalid_proto_version.proto

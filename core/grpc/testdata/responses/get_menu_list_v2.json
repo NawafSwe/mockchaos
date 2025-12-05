@@ -1,0 +1,47 @@
+[
+  {
+    "service": "restaurants.RestaurantService",
+    "method": "ListMenuItems",
+    "response_proto_type": "restaurants.MenuItemListV2",
+    "response": {
+      "menuItems": [
+        {
+          "id": "1",
+          "restaurantId": "101",
+          "name": "Margherita Pizza",
+          "isAvailable": true,
+          "price": 12.99,
+          "createdAt": "2024-01-15T10:30:00Z",
+          "updatedAt": "2024-01-15T10:30:00Z"
+        },
+        {
+          "id": "2",
+          "restaurantId": "101",
+          "name": "Pepperoni Pizza",
+          "isAvailable": true,
+          "price": 14.99,
+          "createdAt": "2024-01-15T10:30:00Z",
+          "updatedAt": "2024-01-15T10:30:00Z"
+        },
+        {
+          "id": "3",
+          "restaurantId": "101",
+          "name": "Caesar Salad",
+          "isAvailable": false,
+          "price": 8.99,
+          "createdAt": "2024-01-15T10:30:00Z",
+          "updatedAt": "2024-01-20T14:00:00Z"
+        }
+      ]
+    },
+    "status_codes": [
+      0,
+      13
+    ],
+    "latencies": [
+      "50ms",
+      "150ms"
+    ],
+    "error_message": "mock error"
+  }
+]
