@@ -220,7 +220,7 @@ Mockchaos includes a CLI tool for running standalone mock servers:
 ### Installation
 
 ```bash
-go install github.com/nawafswe/mockchaos/cmd/chaosmock@latest
+go install github.com/nawafswe/mockchaos/cmd/mockchaos@latest
 ```
 
 ### HTTP Server

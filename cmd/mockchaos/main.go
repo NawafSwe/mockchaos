@@ -5,7 +5,7 @@ import (
 	"flag"
 	"log"
 
-	"github.com/nawafswe/mockchaos/cmd/svc"
+	"github.com/nawafswe/mockchaos/internal/svc"
 )
 
 func main() {
