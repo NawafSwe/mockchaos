@@ -1,5 +1,14 @@
 # Mockchaos
 
+[![Build Status](https://github.com/nawafswe/mockchaos/workflows/CI/badge.svg)](https://github.com/nawafswe/mockchaos/actions)
+[![Coverage](https://gocover.io/_badge/github.com/nawafswe/mockchaos)](https://gocover.io/github.com/nawafswe/mockchaos)
+[![Go Report Card](https://goreportcard.com/badge/github.com/nawafswe/mockchaos)](https://goreportcard.com/report/github.com/nawafswe/mockchaos)
+[![Go Version](https://img.shields.io/badge/go-1.25.3-blue.svg)](https://golang.org)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/nawafswe/mockchaos)](https://github.com/nawafswe/mockchaos/releases)
+[![GitHub Stars](https://img.shields.io/github/stars/nawafswe/mockchaos?style=social)](https://github.com/nawafswe/mockchaos/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/nawafswe/mockchaos?style=social)](https://github.com/nawafswe/mockchaos/network/members)
+
 **Mockchaos** is a Go library for creating mock HTTP and gRPC servers with configurable latencies, status codes, and responses. It's designed for chaos engineering, integration testing, and simulating real-world API behavior in development environments.
 
 ## Features

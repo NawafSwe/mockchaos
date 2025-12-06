@@ -17,26 +17,22 @@ help h:
 		printf "%s\n" $$help_info; \
 	done
 
-tests:
+tests: ## Run all tests
 	@echo "=================="
 	@echo "Running unit tests"
 	@echo "=================="
 	go test -tags unit -shuffle=on -coverprofile coverage.out ./...
 
-
-format:
+format: ## Format code using gci and gofumpt
 	@echo "=========================================="
 	@echo "Formatting your code"
 	@echo "=========================================="
-	gci write -s standard -s default . --skip-generated --skip-vendor  && gofumpt -l -w .
+	gci write -s standard -s default . --skip-generated --skip-vendor && gofumpt -l -w .
 
-
-
-lint: ## Run all enabled linters
+lint: ## Run all enabled linters using golangci-lint
 	@echo "=========================================="
 	@echo "Running static analysis"
 	@echo "Use 'fix=true' to fix issues automatically"
-	@echo "Use 'use_github_pat=true' to use github personal access token to download packages"
 	@echo "=========================================="
 	LINTER_FLAGS="-v"; \
     	golangci-lint run ${LINTER_FLAGS}; \
