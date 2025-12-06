@@ -328,8 +328,7 @@ go test -v
 - **No Match**: Returns `Unimplemented` status error
 
 ## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please see our [Contributing Guide](CONTRIBUTING.md) for details on how to contribute.
 
 ## License
 
