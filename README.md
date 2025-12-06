@@ -1,7 +1,7 @@
 # Mockchaos
 
-[![Build Status](https://github.com/nawafswe/mockchaos/workflows/CI/badge.svg)](https://github.com/nawafswe/mockchaos/actions)
-[![Coverage](https://gocover.io/_badge/github.com/nawafswe/mockchaos)](https://gocover.io/github.com/nawafswe/mockchaos)
+[![Build Status](https://github.com/nawafswe/mockchaos/actions/workflows/test.yaml/badge.svg)](https://github.com/nawafswe/mockchaos/actions)
+[![Coverage](https://codecov.io/gh/nawafswe/mockchaos/branch/main/graph/badge.svg)](https://codecov.io/gh/nawafswe/mockchaos)
 [![Go Report Card](https://goreportcard.com/badge/github.com/nawafswe/mockchaos)](https://goreportcard.com/report/github.com/nawafswe/mockchaos)
 [![Go Version](https://img.shields.io/badge/go-1.25.3-blue.svg)](https://golang.org)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
