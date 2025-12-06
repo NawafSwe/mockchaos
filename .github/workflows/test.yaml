@@ -1,6 +1,10 @@
 name: "Test"
 
 on:
+  push:
+    branches: [ master,main ]
+    paths-ignore:
+      - "*.md"
   pull_request:
     branches:
       - main
@@ -38,7 +42,7 @@ jobs:
 
       - name: Run tests
         run: |
-          go test -v -coverprofile=coverage.out ./...
+          go test -v -coverprofile=coverage.out ./... -coverpkg=./... -skip=cmd
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5

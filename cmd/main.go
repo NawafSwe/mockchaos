@@ -25,4 +25,5 @@ func main() {
 	default:
 		log.Fatalf("unknown service %q, must be one of: http-svc, grpc-svc", *mockServer)
 	}
+
 }
