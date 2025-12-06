@@ -42,7 +42,7 @@ jobs:
 
       - name: Run tests
         run: |
-          go test -v -coverprofile=coverage.out ./... -coverpkg=./... -skip=cmd
+          go test -v -coverprofile=coverage.out ./... -coverpkg=./...
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5

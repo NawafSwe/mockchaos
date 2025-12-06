@@ -47,15 +47,8 @@ func RunGRPCMock(ctx context.Context, port int, protoDir, mocksPath string) {
 		log.Fatalf("grpc: failed to register services: %v", err)
 	}
 
-	// Listen and serve
-	if err := srv.Listen(fmt.Sprintf(":%d", port)); err != nil {
-		log.Fatalf("grpc: failed to listen: %v", err)
-	}
-
 	log.Printf("grpc: loaded %d handlers", len(handlers))
-	log.Printf("grpc: server started on port %d\n", port)
-
-	if err := srv.Serve(); err != nil {
+	if err := srv.Serve(fmt.Sprintf(":%d", port)); err != nil {
 		log.Fatalf("grpc: failed to serve: %v", err)
 	}
 }

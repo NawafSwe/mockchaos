@@ -133,21 +133,14 @@ func (s *Server) registerService(svcDesc protoreflect.ServiceDescriptor) error {
 	return nil
 }
 
-// Listen starts listening on the given address.
-func (s *Server) Listen(addr string) error {
+// Serve starts serving requests.
+func (s *Server) Serve(addr string) error {
 	lis, err := net.Listen("tcp", addr)
 	if err != nil {
 		return fmt.Errorf("failed to listen: %w", err)
 	}
 	s.lis = lis
-	return nil
-}
-
-// Serve starts serving requests.
-func (s *Server) Serve() error {
-	if s.lis == nil {
-		return fmt.Errorf("server not listening - call Listen first")
-	}
+	log.Printf("gRPC server listening on %s", lis.Addr())
 	return s.srv.Serve(s.lis)
 }
 

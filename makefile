@@ -21,7 +21,7 @@ tests: ## Run all tests
 	@echo "=================="
 	@echo "Running unit tests"
 	@echo "=================="
-	go test -tags unit -shuffle=on -coverprofile coverage.out ./...
+	go test -tags unit -shuffle=on -coverprofile coverage.out $(shell go list ./... | grep -v /cmd/)
 
 format: ## Format code using gci and gofumpt
 	@echo "=========================================="

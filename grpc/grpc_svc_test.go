@@ -127,14 +127,10 @@ func TestServer_Integration(t *testing.T) {
 			err = server.RegisterServices()
 			assert.NoError(t, err)
 
-			// Start listening
-			err = server.Listen(":0")
-			assert.NoError(t, err)
-
 			// Start serving in a goroutine
 			serveErr := make(chan error, 1)
 			go func() {
-				serveErr <- server.Serve()
+				serveErr <- server.Serve(":0")
 			}()
 
 			// Wait for server to start
