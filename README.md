@@ -256,6 +256,8 @@ The `mocks_path` directory is recursively scanned for all `.json` files, which a
 
 See `examples/k8s/app.yaml` for a complete Kubernetes deployment example.
 
+- **Multiple Services**: Host multiple gRPC or HTTP services with different mock paths to isolate services and resources (e.g., deploy separate gRPC services for restaurants and orders)
+
 ### Example Deployment
 
 ```yaml

@@ -3,24 +3,24 @@ kind: Namespace
 metadata:
   name: "mockchaos"
 ---
-# gRPC Mock Server Deployment
+# gRPC Mock Server Deployment - Orders Service
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "grpc-mockserver"
+  name: "grpc-orders-mockserver"
   namespace: "mockchaos"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: "grpc-mockserver"
+      app: "grpc-orders-mockserver"
   template:
     metadata:
       labels:
-        app: "grpc-mockserver"
+        app: "grpc-orders-mockserver"
     spec:
       containers:
-        - name: "grpc"
+        - name: "grpc-orders"
           # Build your image with: go install github.com/nawafswe/mockchaos/cmd/chaosmock@latest
           # Then copy the binary to your image at ./bin/mockchaos
           image: 'your-registry/mockchaos:latest'
@@ -45,7 +45,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: "grpc-svc"
+  name: "grpc-orders-svc"
   namespace: "mockchaos"
 spec:
   type: ClusterIP
@@ -54,7 +54,60 @@ spec:
       targetPort: 50051
       name: grpc
   selector:
-    app: "grpc-mockserver"
+    app: "grpc-orders-mockserver"
+---
+# gRPC Mock Server Deployment - Restaurants Service
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "grpc-restaurants-mockserver"
+  namespace: "mockchaos"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "grpc-restaurants-mockserver"
+  template:
+    metadata:
+      labels:
+        app: "grpc-restaurants-mockserver"
+    spec:
+      containers:
+        - name: "grpc-restaurants"
+          # Build your image with: go install github.com/nawafswe/mockchaos/cmd/chaosmock@latest
+          # Then copy the binary to your image at ./bin/mockchaos
+          image: 'your-registry/mockchaos:latest'
+          ports:
+            - containerPort: 50052
+              name: grpc
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              ./bin/mockchaos \
+                -mock_server=grpc-svc \
+                -grpc_port=50052 \
+                -grpc_proto_dir=./protos \
+                -mocks_path=./grpc-mocks/restaurants
+          # Mount your proto files and mocks using ConfigMap or volumes
+          # volumeMounts:
+          #   - name: protos
+          #     mountPath: /app/protos
+          #   - name: mocks
+          #     mountPath: /app/grpc-mocks
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "grpc-restaurants-svc"
+  namespace: "mockchaos"
+spec:
+  type: ClusterIP
+  ports:
+    - port: 50052
+      targetPort: 50052
+      name: grpc
+  selector:
+    app: "grpc-restaurants-mockserver"
 ---
 # HTTP Mock Server Deployment
 apiVersion: apps/v1
