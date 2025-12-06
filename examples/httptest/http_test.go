@@ -129,7 +129,9 @@ func TestExampleHTTPTestUsage(t *testing.T) {
 			resp, err := client.Do(req)
 			latency := time.Since(start)
 			assert.NoError(t, err)
-			defer resp.Body.Close()
+			defer func() {
+				_ = resp.Body.Close()
+			}()
 
 			assert.Contains(t, tt.expectedStatusCodes, resp.StatusCode)
 
@@ -171,7 +173,9 @@ func TestExampleHTTPTestUsageWithJSON(t *testing.T) {
 
 	resp, err := client.Do(req)
 	assert.NoError(t, err)
-	defer resp.Body.Close()
+	defer func() {
+		_ = resp.Body.Close()
+	}()
 
 	assert.Contains(t, []int{nethttp.StatusOK, nethttp.StatusInternalServerError}, resp.StatusCode)
 	assert.Equal(t, "application/json", resp.Header.Get("Content-Type"))
