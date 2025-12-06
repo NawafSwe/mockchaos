@@ -15,16 +15,16 @@ func main() {
 	grpcProtoDir := flag.String("grpc_proto_dir", "", "path to directory containing .proto files")
 	mockServer := flag.String("mock_server", "http-svc", "service to run: http-svc or grpc-svc")
 	flag.Parse()
-	context, cancel := context.WithCancel(context.Background())
+	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	switch *mockServer {
 	case "http-svc":
-		svc.RunHTTPMock(context, *httpPort, *mocksPath)
+		svc.RunHTTPMock(ctx, *httpPort, *mocksPath)
 	case "grpc-svc":
 		if *grpcProtoDir == "" {
 			log.Fatal("grpc_proto_dir is required when using grpc-svc")
 		}
-		svc.RunGRPCMock(context, *grpcPort, *grpcProtoDir, *mocksPath)
+		svc.RunGRPCMock(ctx, *grpcPort, *grpcProtoDir, *mocksPath)
 	default:
 		log.Fatalf("unknown service %q, must be one of: http-svc, grpc-svc", *mockServer)
 	}

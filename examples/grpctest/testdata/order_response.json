@@ -1,0 +1,10 @@
+{
+  "order": {
+    "orderId": "123",
+    "restaurantId": "456",
+    "customerId": "789",
+    "status": "PENDING",
+    "grandTotal": 29.99,
+    "items": []
+  }
+}

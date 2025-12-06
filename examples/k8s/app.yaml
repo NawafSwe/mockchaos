@@ -1,0 +1,104 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: "mockchaos"
+---
+# gRPC Mock Server Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "grpc-mockserver"
+  namespace: "mockchaos"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "grpc-mockserver"
+  template:
+    metadata:
+      labels:
+        app: "grpc-mockserver"
+    spec:
+      containers:
+        - name: "grpc"
+          # Build your image with: go install github.com/nawafswe/mockchaos/cmd/chaosmock@latest
+          # Then copy the binary to your image at ./bin/chaosmock
+          image: 'your-registry/mockchaos:latest'
+          ports:
+            - containerPort: 50051
+              name: grpc
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              ./bin/chaosmock \
+                -mock_server=grpc-svc \
+                -grpc_port=50051 \
+                -grpc_proto_dir=./protos \
+                -mocks_path=./grpc-mocks/orders
+          # Mount your proto files and mocks using ConfigMap or volumes
+          # volumeMounts:
+          #   - name: protos
+          #     mountPath: /app/protos
+          #   - name: mocks
+          #     mountPath: /app/grpc-mocks
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "grpc-svc"
+  namespace: "mockchaos"
+spec:
+  type: ClusterIP
+  ports:
+    - port: 50051
+      targetPort: 50051
+      name: grpc
+  selector:
+    app: "grpc-mockserver"
+---
+# HTTP Mock Server Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "http-mockserver"
+  namespace: "mockchaos"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "http-mockserver"
+  template:
+    metadata:
+      labels:
+        app: "http-mockserver"
+    spec:
+      containers:
+        - name: "http"
+          image: 'your-registry/mockchaos:latest'
+          ports:
+            - containerPort: 8080
+              name: http
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              ./bin/chaosmock \
+                -mock_server=http-svc \
+                -http_port=8080 \
+                -mocks_path=./http-mocks
+          # volumeMounts:
+          #   - name: mocks
+          #     mountPath: /app/http-mocks
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "http-svc"
+  namespace: "mockchaos"
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+      name: http
+  selector:
+    app: "http-mockserver"

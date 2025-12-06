@@ -1,0 +1,81 @@
+[
+  {
+    "path": "/api/v1/users",
+    "method": "GET",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "response": {
+      "users": [
+        {
+          "id": 1,
+          "name": "Alice",
+          "email": "alice@example.com",
+          "role": "admin"
+        },
+        {
+          "id": 2,
+          "name": "Bob",
+          "email": "bob@example.com",
+          "role": "user"
+        }
+      ],
+      "total": 2,
+      "page": 1
+    },
+    "latencies": [
+      "100ms",
+      "200ms",
+      "300ms"
+    ],
+    "statuses": [
+      200,
+      500
+    ]
+  },
+  {
+    "path": "/api/v1/users",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "response": {
+      "id": 123,
+      "name": "New User",
+      "email": "newuser@example.com",
+      "created_at": "2024-01-15T10:30:00Z"
+    },
+    "latencies": [
+      "150ms",
+      "250ms"
+    ],
+    "statuses": [
+      201,
+      400
+    ]
+  },
+  {
+    "path": "/api/v1/users/1",
+    "method": "GET",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "response": {
+      "id": 1,
+      "name": "Alice",
+      "email": "alice@example.com",
+      "role": "admin",
+      "created_at": "2024-01-01T00:00:00Z"
+    },
+    "latencies": [
+      "80ms",
+      "120ms"
+    ],
+    "statuses": [
+      200,
+      404,
+      500
+    ]
+  }
+]
+
