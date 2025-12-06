@@ -1,0 +1,42 @@
+[
+  {
+    "path": "/api/v1/test",
+    "method": "GET",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "response": {
+      "id": "test_123",
+      "name": "Test Item",
+      "status": "active"
+    },
+    "latencies": [
+      "100ms",
+      "200ms"
+    ],
+    "statuses": [
+      200,
+      500
+    ]
+  },
+  {
+    "path": "/api/v1/test",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "response": {
+      "id": "test_456",
+      "created": true
+    },
+    "latencies": [
+      "150ms",
+      "300ms"
+    ],
+    "statuses": [
+      201,
+      400
+    ]
+  }
+]
+

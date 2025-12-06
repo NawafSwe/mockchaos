@@ -1,0 +1,22 @@
+syntax = "proto3";
+package testservice;
+option go_package = "github.com/nawafswe/mockchaos/internal/svc/testdata/proto";
+
+message TestItem {
+  int64 id = 1;
+  string name = 2;
+  double price = 3;
+}
+
+message TestRequest {
+  int64 id = 1;
+}
+
+message TestResponse {
+  TestItem item = 1;
+}
+
+service TestService {
+  rpc GetTest(TestRequest) returns (TestResponse);
+}
+

@@ -22,7 +22,7 @@ spec:
       containers:
         - name: "grpc"
           # Build your image with: go install github.com/nawafswe/mockchaos/cmd/chaosmock@latest
-          # Then copy the binary to your image at ./bin/chaosmock
+          # Then copy the binary to your image at ./bin/mockchaos
           image: 'your-registry/mockchaos:latest'
           ports:
             - containerPort: 50051
@@ -30,7 +30,7 @@ spec:
           command: ["/bin/sh", "-c"]
           args:
             - |
-              ./bin/chaosmock \
+              ./bin/mockchaos \
                 -mock_server=grpc-svc \
                 -grpc_port=50051 \
                 -grpc_proto_dir=./protos \
@@ -81,7 +81,7 @@ spec:
           command: ["/bin/sh", "-c"]
           args:
             - |
-              ./bin/chaosmock \
+              ./bin/mockchaos \
                 -mock_server=http-svc \
                 -http_port=8080 \
                 -mocks_path=./http-mocks
