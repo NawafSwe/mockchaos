@@ -1,0 +1,18 @@
+[
+  {
+    "service": "testservice.TestService",
+    "method": "GetTest",
+    "response_proto_type": "testservice.TestResponse",
+    "response": {
+      "item": {
+        "id": 123,
+        "name": "Test Item",
+        "price": 29.99
+      }
+    },
+    "status_codes": [0, 13],
+    "latencies": ["100ms", "300ms"],
+    "error_message": "mock internal error"
+  }
+]
+

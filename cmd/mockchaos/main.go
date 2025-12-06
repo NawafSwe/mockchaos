@@ -19,11 +19,14 @@ func main() {
 	defer cancel()
 	switch *mockServer {
 	case "http-svc":
-		svc.RunHTTPMock(ctx, *httpPort, *mocksPath)
+		if err := svc.RunHTTPMock(ctx, *httpPort, *mocksPath); err != nil {
+			log.Fatalf("failed to run http mock server: %v", err)
+		}
 	case "grpc-svc":
-		svc.RunGRPCMock(ctx, *grpcPort, *grpcProtoDir, *mocksPath)
+		if err := svc.RunGRPCMock(ctx, *grpcPort, *grpcProtoDir, *mocksPath); err != nil {
+			log.Fatalf("failed to run grpc mock server: %v", err)
+		}
 	default:
 		log.Fatalf("unknown service %q, must be one of: http-svc, grpc-svc", *mockServer)
 	}
-
 }

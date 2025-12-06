@@ -14,27 +14,28 @@ import (
 )
 
 // RunHTTPMock starts a new HTTP server with the given handlers and port.
-func RunHTTPMock(_ context.Context, port int, mocksPath string) {
+func RunHTTPMock(_ context.Context, port int, mocksPath string) error {
 	if mocksPath == "" {
-		log.Fatal("mocks_path is required")
+		return fmt.Errorf("mocks_path is required")
 	}
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+		return fmt.Errorf("failed to listen: %w", err)
 	}
 	handlers, err := loadHandlersFromDirectory(mocksPath)
 	if err != nil {
-		log.Fatalf("failed to load mocks directory: %v", err)
+		return fmt.Errorf("failed to load mocks directory: %w", err)
 	}
 	svc := httpsvc.NewServer(handlers...)
 	if svc == nil {
-		log.Fatalf("failed to create http server")
+		return fmt.Errorf("failed to create http server")
 	}
 	log.Println("handlers registered")
 	log.Printf("server started on port %d\n", port)
 	if err := svc.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v", err)
+		return fmt.Errorf("failed to serve: %w", err)
 	}
+	return nil
 }
 
 // loadHandlersFromDirectory recursively loads all JSON handler files from a directory

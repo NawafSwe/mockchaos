@@ -226,7 +226,7 @@ go install github.com/nawafswe/mockchaos/cmd/mockchaos@latest
 ### HTTP Server
 
 ```bash
-chaosmock \
+mockchaos \
   -mock_server=http-svc \
   -http_port=8080 \
   -mocks_path=./http-mocks
@@ -235,7 +235,7 @@ chaosmock \
 ### gRPC Server
 
 ```bash
-chaosmock \
+mockchaos \
   -mock_server=grpc-svc \
   -grpc_port=50051 \
   -grpc_proto_dir=./protos \
@@ -272,7 +272,7 @@ spec:
           command: ["/bin/sh", "-c"]
           args:
             - |
-              ./bin/chaosmock \
+              ./bin/mockchaos \
                 -mock_server=http-svc \
                 -http_port=8080 \
                 -mocks_path=./http-mocks
