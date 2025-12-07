@@ -147,7 +147,7 @@ func TestExampleHTTPTestUsage(t *testing.T) {
 			assert.Contains(t, string(body), tt.expectedBodyContains)
 
 			if tt.validateJSON {
-				var jsonResponse map[string]interface{}
+				var jsonResponse map[string]any
 				err = json.Unmarshal(body, &jsonResponse)
 				assert.NoError(t, err)
 			}
@@ -183,7 +183,7 @@ func TestExampleHTTPTestUsageWithJSON(t *testing.T) {
 	body, err := io.ReadAll(resp.Body)
 	assert.NoError(t, err)
 
-	var usersResponse map[string]interface{}
+	var usersResponse map[string]any
 	err = json.Unmarshal(body, &usersResponse)
 	assert.NoError(t, err)
 	assert.NotNil(t, usersResponse["users"])

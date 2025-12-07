@@ -288,7 +288,7 @@ spec:
 - **`grpctest`**: Test utilities for gRPC mocking
 - **`http`**: Standalone HTTP server implementation
 - **`grpc`**: Standalone gRPC server implementation
-- **`cmd/chaosmock`**: CLI tool for running standalone servers
+- **`cmd/mockchaos`**: CLI tool for running standalone servers
 
 ## Examples
 
